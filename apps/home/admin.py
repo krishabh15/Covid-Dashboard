@@ -1,12 +1,7 @@
-# -*- encoding: utf-8 -*-
-"""
-Copyright (c) 2019 - present AppSeed.us
-"""
-
 from django.contrib import admin
-from .models import DoctorVisits
-admin.site.register(DoctorVisits)
+from .models import DoctorVisit
+
+admin.site.register(DoctorVisit)
 
 
 # Register your models here.
-

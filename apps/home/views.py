@@ -41,9 +41,9 @@ def pages(request):
         html_template = loader.get_template('home/page-404.html')
         return HttpResponse(html_template.render(context, request))
 
-    except:
-        html_template = loader.get_template('home/page-500.html')
-        return HttpResponse(html_template.render(context, request))
+    # except:
+    #     html_template = loader.get_template('home/page-500.html')
+    #     return HttpResponse(html_template.render(context, request))
 
 
 def DoctorVisits(request):
@@ -52,12 +52,12 @@ def DoctorVisits(request):
         form = DoctorVisitsForm(request.POST, request.FILES)
         if form.is_valid():
             venue = form.save(commit=False)
-            venue.owner = request.user.id # logged in user
+            venue.owner = request.user.id  # logged in user
             venue.save()
-			#form.save()
-            return 	HttpResponseRedirect('/doctorvisits?submitted=True')
+            # form.save()
+            return HttpResponseRedirect('/doctorvisits?submitted=True')
     else:
         form = DoctorVisitsForm
         if 'submitted' in request.GET:
             submitted = True
-    return render(request, 'home/docotrs.html', {'form':form, 'submitted':submitted})
+    return render(request, 'home/docotrs.html', {'form': form, 'submitted': submitted})

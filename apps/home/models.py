@@ -11,7 +11,9 @@ from django.db import models
 
 #     def __str__(self):
 #         return '{}'.format(self.name)
-class DoctorVists(models.Model):
+
+
+class DoctorVisit(models.Model):
     doctor = models.CharField('Doctor Name', max_length=120)
     visit_date = models.DateTimeField('Visit Date')
     reason = models.CharField('Reason of Viit', max_length=500)

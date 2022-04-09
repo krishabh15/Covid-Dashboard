@@ -32,7 +32,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">Doctor</label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -44,7 +44,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">Date</label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -56,7 +56,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">Reason of visit</label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">Notes</label>
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -83,19 +83,72 @@
 
 					<div class="clearfix"></div>
 				</form>
-				<form action="" method=POST enctype="multipart/form-data">
-					{% csrf_token %}
-		
-					{{ form.as_p }}
-		
-					<input type="submit" value="Submit" class="btn btn-secondary">
-		
+				<form action="" method="POST" enctype="multipart/form-data">
+					{% csrf_token %} {{ form.as_p }}
+
+					<input type="submit" value="Submit" class="btn btn-secondary" />
 				</form>
 				{% endif %}
 			</div>
 		</div>
 	</div>
 </div>
+
+<!-- <div>
+	<form method="POST" action="{%  url 'doctors' %}" class="doctor-visit">
+		{% if messages %} {% for message in messages %}
+		<div class="alert alert-primary" role="alert"><strong>Thank You!</strong>{{ message }}</div>
+		{% endfor %} {% endif %} {% csrf_token %}
+		<div class="container">
+			<p class="muted">
+				Kindly fill out the form below and one of our representatives will be happy to get in touch with you.
+			</p>
+			<div class="row">
+				<div class="form-group col-12">
+					<input
+						type="text"
+						name="doctor"
+						class="form-control"
+						id="doctor"
+						placeholder="Name*"
+						value="{{ name }}"
+						required
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<input type="email" name="email" id="email" class="form-control" placeholder="Email*" required />
+					<small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
+				</div>
+				<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<input type="text" name="phone" class="form-control" id="phone" placeholder="Phone*" required />
+					<small id="emailHelp" class="form-text">We'll never share your number with anyone else.</small>
+				</div>
+			</div>
+		</div>
+
+		<div class="container form-group">
+			<textarea
+				class="form-control"
+				name="reason"
+				id="reason"
+				rows="3"
+				placeholder="Message*"
+				value="{{ reason }}"
+				required
+			></textarea>
+		</div>
+		<div class="container text-center">
+			<button type="submit" name="submit" id="submit" class="btn btn-primary form-submit" onClick="sendContact();">
+				Send Message
+			</button>
+		</div>
+		<div id="mail-status"></div>
+	</form>
+</div> -->
 
 <div class="row">
 	<div class="col-md-12">
