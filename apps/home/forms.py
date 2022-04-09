@@ -5,7 +5,7 @@ from .models import DoctorVisits
 
 class DoctorVisitsForm(ModelForm):
 	class Meta:
-		model = DoctorVists
+		model = DoctorVisits
 		fields = ('doctor', 'visit_date', 'reason', 'notes')
 
 		labels = {
