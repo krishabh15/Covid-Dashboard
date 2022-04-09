@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -12,3 +11,11 @@ from django.contrib.auth.models import User
 
 #     def __str__(self):
 #         return '{}'.format(self.name)
+class DoctorVists(models.Model):
+    doctor = models.CharField('Doctor Name', max_length=120)
+    visit_date = models.DateTimeField('Visit Date')
+    reason = models.CharField('Reason of Viit', max_length=500)
+    notes = models.CharField('Notes', max_length=500)
+
+    def __str__(self):
+        return self.doctor
