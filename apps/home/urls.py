@@ -9,12 +9,12 @@ urlpatterns = [
     path('', views.index, name='home'),
     #
     # # Matches any html file
-    # re_path(r'^.*\.*', views.pages, name='pages'),
     #
     # # path('doctors', views.doctors, name="doctors"),
     # path('medicines/', views.medicines, name="medicines"),
 
     path('doctors', views.doctor_visits, name='doctors'),
+    re_path(r'^.*\.*', views.pages, name='pages'),
 
 ]
 
