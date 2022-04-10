@@ -76,7 +76,7 @@
 
 					<br />
 
-					<button type="submit" name="register" class="btn btn-primary pull-left">Save</button>
+					<!-- <button type="submit" name="register" class="btn btn-primary pull-left">Save</button> -->
 
 					&nbsp; &nbsp;
 					<!-- <span class="pull-right"> Have an account? <a href="{% url 'login' %}" class="text-primary">Login</a> </span> -->
@@ -93,62 +93,6 @@
 		</div>
 	</div>
 </div>
-
-<!-- <div>
-	<form method="POST" action="{%  url 'doctors' %}" class="doctor-visit">
-		{% if messages %} {% for message in messages %}
-		<div class="alert alert-primary" role="alert"><strong>Thank You!</strong>{{ message }}</div>
-		{% endfor %} {% endif %} {% csrf_token %}
-		<div class="container">
-			<p class="muted">
-				Kindly fill out the form below and one of our representatives will be happy to get in touch with you.
-			</p>
-			<div class="row">
-				<div class="form-group col-12">
-					<input
-						type="text"
-						name="doctor"
-						class="form-control"
-						id="doctor"
-						placeholder="Name*"
-						value="{{ name }}"
-						required
-					/>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-					<input type="email" name="email" id="email" class="form-control" placeholder="Email*" required />
-					<small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
-				</div>
-				<div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-					<input type="text" name="phone" class="form-control" id="phone" placeholder="Phone*" required />
-					<small id="emailHelp" class="form-text">We'll never share your number with anyone else.</small>
-				</div>
-			</div>
-		</div>
-
-		<div class="container form-group">
-			<textarea
-				class="form-control"
-				name="reason"
-				id="reason"
-				rows="3"
-				placeholder="Message*"
-				value="{{ reason }}"
-				required
-			></textarea>
-		</div>
-		<div class="container text-center">
-			<button type="submit" name="submit" id="submit" class="btn btn-primary form-submit" onClick="sendContact();">
-				Send Message
-			</button>
-		</div>
-		<div id="mail-status"></div>
-	</form>
-</div> -->
 
 <div class="row">
 	<div class="col-md-12">
