@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import DoctorVisit
 from .models import FamilyVisit
-
+from .models import MedicineList
 
 class FamilyVisitsForm(ModelForm):
     location = forms.CharField(
@@ -85,3 +85,47 @@ class DoctorVisitsForm(ModelForm):
     class Meta:
         model = DoctorVisit
         fields = ('doctor', 'visit_date', 'reason', 'notes')
+    
+class MedicineForm(ModelForm):
+    medicine = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Medicine",
+                "class": "form-control"
+            }
+        ))
+    Nooftimesaday = forms.CharField(
+        widget=forms.DateInput(
+            attrs={
+                "placeholder": "No of times a day",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+    fromdate = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "From",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+    to = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "To",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+    reason = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Reason",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+    class Meta:
+        model = MedicineList
+        fields = ('medicine', 'Nooftimesaday', 'fromdate', 'to','reason')

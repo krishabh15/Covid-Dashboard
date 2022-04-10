@@ -30,7 +30,17 @@ class FamilyVisit(models.Model):
     noofpeople = models.CharField('No of people', max_length=500, blank=True, null=True)
     date = models.DateField('date', blank=True, null=True)
     time = models.CharField('time', max_length=500, blank=True, null=True)
-    reason = models.IntegerField('reason', max_length=500, blank=True, null=True)
+    reason = models.CharField('reason', max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.location
+
+class MedicineList(models.Model):
+    medicine = models.CharField('Medicine', max_length=120)
+    Nooftimesaday = models.CharField('No of times a day', max_length=500, blank=True, null=True)
+    fromdate = models.DateField('from', blank=True, null=True)
+    to = models.DateField('to', blank=True, null=True)
+    reason = models.CharField('reason', max_length=500, blank=True, null=True)
+
+    def __str__(self):
+        return self.medicine

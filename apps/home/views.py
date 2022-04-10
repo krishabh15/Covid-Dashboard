@@ -6,7 +6,7 @@ from django.template import loader
 from django.urls import reverse
 from .forms import DoctorVisitsForm
 from .forms import FamilyVisitsForm
-
+from .forms import MedicineForm
 
 @login_required(login_url="/login/")
 def index(request):
@@ -100,6 +100,7 @@ def doctor_visits(request):
             venue = form.save()
             venue.owner = request.user.id  # logged in user
             venue.save()
+            print(venue)
             submitted = True
             # form.save()
         else:
@@ -110,11 +111,13 @@ def doctor_visits(request):
         'success': submitted,
     }
     return HttpResponse(html_template.render(context, request))
+
 def family_visits(request):
     form = FamilyVisitsForm(request.POST)
     load_template = request.path.split('/')[-1] + '.html'
     submitted = False
     if request.method == "POST":
+        print(request.method, form.errors)
         if form.is_valid():
             venue = form.save()
             venue.owner = request.user.id  # logged in user
@@ -123,6 +126,27 @@ def family_visits(request):
             # form.save()
         else:
             form = FamilyVisitsForm
+    html_template = loader.get_template('home/' + load_template)
+    context = {
+        'form': form,
+        'success': submitted,
+    }
+    return HttpResponse(html_template.render(context, request))
+
+def medicine(request):
+    form = MedicineForm(request.POST)
+    load_template = request.path.split('/')[-1] + '.html'
+    submitted = False
+    if request.method == "POST":
+        print(request.method, form.errors)
+        if form.is_valid():
+            venue = form.save()
+            venue.owner = request.user.id  # logged in user
+            venue.save()
+            submitted = True
+            # form.save()
+        else:
+            form = MedicineForm
     html_template = loader.get_template('home/' + load_template)
     context = {
         'form': form,

@@ -15,6 +15,7 @@ urlpatterns = [
 
     path('doctors', views.doctor_visits, name='doctors'),
     path('family', views.family_visits, name='family'),
+    path('medicines', views.medicine, name='medicines'),
     re_path(r'^.*\.*', views.pages, name='pages'),
 
 ]
