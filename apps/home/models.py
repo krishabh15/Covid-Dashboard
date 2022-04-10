@@ -1,3 +1,4 @@
+from urllib import request
 from django.db import models
 
 # Create your models here.
@@ -12,12 +13,24 @@ from django.db import models
 #     def __str__(self):
 #         return '{}'.format(self.name)
 
+# curr_user = request.user
 
 class DoctorVisit(models.Model):
     doctor = models.CharField('Doctor Name', max_length=120)
     visit_date = models.DateField('Visit Date', blank=True, null=True)
     reason = models.CharField('Reason of Visit', max_length=500, blank=True, null=True)
     notes = models.CharField('Notes', max_length=500, blank=True, null=True)
+    user = models.IntegerField('id', max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.doctor
+
+class FamilyVisit(models.Model):
+    location = models.CharField('location', max_length=120)
+    noofpeople = models.CharField('No of people', max_length=500, blank=True, null=True)
+    date = models.DateField('date', blank=True, null=True)
+    time = models.CharField('time', max_length=500, blank=True, null=True)
+    reason = models.IntegerField('reason', max_length=500, blank=True, null=True)
+
+    def __str__(self):
+        return self.location

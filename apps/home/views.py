@@ -5,6 +5,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from .forms import DoctorVisitsForm
+from .forms import FamilyVisitsForm
 
 
 @login_required(login_url="/login/")
@@ -103,6 +104,25 @@ def doctor_visits(request):
             # form.save()
         else:
             form = DoctorVisitsForm
+    html_template = loader.get_template('home/' + load_template)
+    context = {
+        'form': form,
+        'success': submitted,
+    }
+    return HttpResponse(html_template.render(context, request))
+def family_visits(request):
+    form = FamilyVisitsForm(request.POST)
+    load_template = request.path.split('/')[-1] + '.html'
+    submitted = False
+    if request.method == "POST":
+        if form.is_valid():
+            venue = form.save()
+            venue.owner = request.user.id  # logged in user
+            venue.save()
+            submitted = True
+            # form.save()
+        else:
+            form = FamilyVisitsForm
     html_template = loader.get_template('home/' + load_template)
     context = {
         'form': form,
