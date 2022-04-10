@@ -5,13 +5,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from .forms import DoctorVisitsForm, FamilyVisitsForm, MedicineForm, TripsForm, TakeoutsForm
-from .models import DoctorVisit
+from .models import DoctorVisit, FamilyVisit, MedicineList, Takeouts, Trips
 
 
 @login_required(login_url="/login/")
 def index(request):
     visits = DoctorVisit.objects.filter(user=request.user.id)[1::]
-    # visits = list(visits)
     context = {'segment': 'index'}
     print(visits)
 
@@ -53,9 +52,7 @@ def doctor_visits(request):
             venue = form.save()
             venue.user = request.user.id  # logged in user
             venue.save()
-            print(venue)
             submitted = True
-            print(venue)
         else:
             form = DoctorVisitsForm
     html_template = loader.get_template('home/' + load_template)
@@ -70,12 +67,13 @@ def doctor_visits(request):
 def family_visits(request):
     form = FamilyVisitsForm(request.POST)
     load_template = request.path.split('/')[-1] + '.html'
+    visits = FamilyVisit.objects.filter(user=request.user.id)
     submitted = False
     if request.method == "POST":
         print(request.method, form.errors)
         if form.is_valid():
             venue = form.save()
-            venue.owner = request.user.id  # logged in user
+            venue.user = request.user.id  # logged in user
             venue.save()
             submitted = True
             # form.save()
@@ -85,6 +83,7 @@ def family_visits(request):
     context = {
         'form': form,
         'success': submitted,
+        'visits': visits,
 
     }
     return HttpResponse(html_template.render(context, request))
@@ -93,12 +92,13 @@ def family_visits(request):
 def medicine(request):
     form = MedicineForm(request.POST)
     load_template = request.path.split('/')[-1] + '.html'
+    lists = MedicineList.objects.filter(user=request.user.id)
     submitted = False
     if request.method == "POST":
         print(request.method, form.errors)
         if form.is_valid():
             venue = form.save()
-            venue.owner = request.user.id  # logged in user
+            venue.user = request.user.id  # logged in user
             venue.save()
             submitted = True
             # form.save()
@@ -108,6 +108,7 @@ def medicine(request):
     context = {
         'form': form,
         'success': submitted,
+        'lists': lists,
     }
     return HttpResponse(html_template.render(context, request))
 
@@ -115,12 +116,13 @@ def medicine(request):
 def trips(request):
     form = TripsForm(request.POST)
     load_template = request.path.split('/')[-1] + '.html'
+    trips = Trips.objects.filter(user=request.user.id)
     submitted = False
     if request.method == "POST":
         print(request.method, form.errors)
         if form.is_valid():
             venue = form.save()
-            venue.owner = request.user.id  # logged in user
+            venue.user = request.user.id  # logged in user
             venue.save()
             submitted = True
             # form.save()
@@ -130,6 +132,7 @@ def trips(request):
     context = {
         'form': form,
         'success': submitted,
+        'trips': trips,
     }
     return HttpResponse(html_template.render(context, request))
 
@@ -137,12 +140,13 @@ def trips(request):
 def takeouts(request):
     form = TakeoutsForm(request.POST)
     load_template = request.path.split('/')[-1] + '.html'
+    outs = Takeouts.objects.filter(user=request.user.id)
     submitted = False
     if request.method == "POST":
         print(request.method, form.errors)
         if form.is_valid():
             venue = form.save()
-            venue.owner = request.user.id  # logged in user
+            venue.user = request.user.id  # logged in user
             venue.save()
             submitted = True
             # form.save()
@@ -152,5 +156,6 @@ def takeouts(request):
     context = {
         'form': form,
         'success': submitted,
+        'outs': outs
     }
     return HttpResponse(html_template.render(context, request))

@@ -18,8 +18,7 @@
 
 				<br />
 
-				{% if success %}
-					Done!
+				{% if success %} Done!
 
 				<p class="">
 					Please <a href="{% url 'login' %}" class="text-black text-small">authenticate</a> using the new account.
@@ -91,118 +90,47 @@
 	</div>
 </div>
 
-<!-- <div class="row">
+<div class="row">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header card-header-primary">
-				<h4 class="card-title">Your Past Trips</h4>
-				<p class="card-category">Here is a list of your past 10 trips</p>
+				<h4 class="card-title">Trips</h4>
+
+				<p class="card-category">Here is a trip of your trips</p>
 			</div>
+
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table">
 						<thead class="text-primary">
-							<th>ID</th>
 							<th>Destination</th>
+
 							<th>Duration</th>
+
 							<th>From</th>
+
 							<th>To</th>
 						</thead>
+
 						<tbody>
+							{% for trip in trips %}
 							<tr>
-								<td>1</td>
-								<td>Dakota Rice</td>
-								<td>Niger</td>
-								<td>Oud-Turnhout</td>
-								<td class="text-primary">$36,738</td>
+								<td>{{trip.destination}}</td>
+
+								<td>{{trip.duration}}</td>
+
+								<td>{{trip.fromdes}}</td>
+
+								<td>{{trip.to}}</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>Minerva Hooper</td>
-								<td>Curaçao</td>
-								<td>Sinaai-Waas</td>
-								<td class="text-primary">$23,789</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Sage Rodriguez</td>
-								<td>Netherlands</td>
-								<td>Baileux</td>
-								<td class="text-primary">$56,142</td>
-							</tr>
+							{%endfor%}
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- <div class="col-md-12">
-		<div class="card card-plain">
-			<div class="card-header card-header-primary">
-				<h4 class="card-title mt-0">Table on Plain Background</h4>
-				<p class="card-category">Here is a subtitle for this table</p>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead class="">
-							<th>ID</th>
-							<th>Name</th>
-							<th>Country</th>
-							<th>City</th>
-							<th>Salary</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Dakota Rice</td>
-								<td>Niger</td>
-								<td>Oud-Turnhout</td>
-								<td>$36,738</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Minerva Hooper</td>
-								<td>Curaçao</td>
-								<td>Sinaai-Waas</td>
-								<td>$23,789</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Sage Rodriguez</td>
-								<td>Netherlands</td>
-								<td>Baileux</td>
-								<td>$56,142</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>Philip Chaney</td>
-								<td>Korea, South</td>
-								<td>Overland Park</td>
-								<td>$38,735</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>Doris Greene</td>
-								<td>Malawi</td>
-								<td>Feldkirchen in Kärnten</td>
-								<td>$63,542</td>
-							</tr>
-							<tr>
-								<td>6</td>
-								<td>Mason Porter</td>
-								<td>Chile</td>
-								<td>Gloucester</td>
-								<td>$78,615</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div> 
-</div> -->
-
+</div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->

@@ -22,6 +22,7 @@ class FamilyVisit(models.Model):
     date = models.DateField('date', blank=True, null=True)
     time = models.CharField('time', max_length=500, blank=True, null=True)
     reason = models.CharField('reason', max_length=500, blank=True, null=True)
+    user = models.IntegerField('id', max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.location
@@ -34,6 +35,7 @@ class MedicineList(models.Model):
     fromdate = models.DateField('from', blank=True, null=True)
     to = models.DateField('to', blank=True, null=True)
     reason = models.CharField('reason', max_length=500, blank=True, null=True)
+    user = models.IntegerField('id', max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.medicine
@@ -45,6 +47,7 @@ class Trips(models.Model):
         'Duration', max_length=500, blank=True, null=True)
     fromdes = models.DateField('From', blank=True, null=True)
     to = models.DateField('To', blank=True, null=True)
+    user = models.IntegerField('id', max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.destination
@@ -55,18 +58,19 @@ class Takeouts(models.Model):
     type = models.CharField('Type', max_length=500, blank=True, null=True)
     date = models.DateField('Date', blank=True, null=True)
     time = models.TimeField('Time', blank=True, null=True)
+    user = models.IntegerField('id', max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.restaurant
 
 
-# class PersonalData(models.Model):
-#     vaccine = models.CharField('Vaccine', max_length=120)
-#     dose1 = models.DateField('Dose 1', blank=True, null=True)
-#     dose2 = models.DateField('Dose 2', blank=True, null=True)
-#     booster = models.DateField('Booster', blank=True, null=True)
-#     notes = models.CharField('Notes', max_length=500, blank=True, null=True)
-#     user = models.IntegerField('id', max_length=500, blank=True, null=True)
+class PersonalData(models.Model):
+    vaccine = models.CharField('Vaccine', max_length=120)
+    dose1 = models.DateField('Dose 1', blank=True, null=True)
+    dose2 = models.DateField('Dose 2', blank=True, null=True)
+    booster = models.DateField('Booster', blank=True, null=True)
+    notes = models.CharField('Notes', max_length=500, blank=True, null=True)
+    user = models.IntegerField('id', max_length=500, blank=True, null=True)
 
-#     def __str__(self):
-#         return self.vaccine
+    def __str__(self):
+        return self.vaccine
