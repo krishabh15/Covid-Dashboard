@@ -1,10 +1,7 @@
+from .models import DoctorVisit, FamilyVisit, MedicineList, Trips, Takeouts
 from django import forms
 from django.forms import ModelForm
-from .models import DoctorVisit
-from .models import FamilyVisit
-from .models import MedicineList
-from .models import Trips
-from .models import Takeouts
+
 
 class FamilyVisitsForm(ModelForm):
     location = forms.CharField(
@@ -88,7 +85,8 @@ class DoctorVisitsForm(ModelForm):
     class Meta:
         model = DoctorVisit
         fields = ('doctor', 'visit_date', 'reason', 'notes')
-    
+
+
 class MedicineForm(ModelForm):
     medicine = forms.CharField(
         widget=forms.TextInput(
@@ -129,9 +127,11 @@ class MedicineForm(ModelForm):
             }
         ),
         required=False)
+
     class Meta:
         model = MedicineList
-        fields = ('medicine', 'Nooftimesaday', 'fromdate', 'to','reason')
+        fields = ('medicine', 'Nooftimesaday', 'fromdate', 'to', 'reason')
+
 
 class TripsForm(ModelForm):
     destination = forms.CharField(
@@ -169,6 +169,7 @@ class TripsForm(ModelForm):
     class Meta:
         model = Trips
         fields = ('destination', 'duration', 'fromdes', 'to')
+
 
 class TakeoutsForm(ModelForm):
     restaurant = forms.CharField(
