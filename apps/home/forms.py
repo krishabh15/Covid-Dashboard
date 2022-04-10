@@ -4,6 +4,7 @@ from .models import DoctorVisit
 from .models import FamilyVisit
 from .models import MedicineList
 from .models import Trips
+from .models import Takeouts
 
 class FamilyVisitsForm(ModelForm):
     location = forms.CharField(
@@ -168,3 +169,40 @@ class TripsForm(ModelForm):
     class Meta:
         model = Trips
         fields = ('destination', 'duration', 'fromdes', 'to')
+
+class TakeoutsForm(ModelForm):
+    restaurant = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Restaurant / Cafe",
+                "class": "form-control"
+            }
+        ), required=False)
+    type = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Type",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+    date = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                "placeholder": "Date",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+    time = forms.TimeField(
+        widget=forms.TimeInput(
+            attrs={
+                "placeholder": "To",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+
+    class Meta:
+        model = Takeouts
+        fields = ('restaurant', 'type', 'date', 'time')

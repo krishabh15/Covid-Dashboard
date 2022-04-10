@@ -9,6 +9,7 @@ from .forms import DoctorVisitsForm
 from .forms import FamilyVisitsForm
 from .forms import MedicineForm
 from .forms import TripsForm
+from .forms import TakeoutsForm
 from .models import DoctorVisit
 
 
@@ -187,3 +188,25 @@ def trips(request):
         'success': submitted,
     }
     return HttpResponse(html_template.render(context, request))
+
+def takeouts(request):
+    form = TakeoutsForm(request.POST)
+    load_template = request.path.split('/')[-1] + '.html'
+    submitted = False
+    if request.method == "POST":
+        print(request.method, form.errors)
+        if form.is_valid():
+            venue = form.save()
+            venue.owner = request.user.id  # logged in user
+            venue.save()
+            submitted = True
+            # form.save()
+        else:
+            form = TakeoutsForm
+    html_template = loader.get_template('home/' + load_template)
+    context = {
+        'form': form,
+        'success': submitted,
+    }
+    return HttpResponse(html_template.render(context, request))
+

@@ -53,3 +53,13 @@ class Trips(models.Model):
 
     def __str__(self):
         return self.destination
+
+class Takeouts(models.Model):
+    restaurant = models.CharField('Restaurant / Cafe', max_length=120)
+    type = models.CharField('Type', max_length=500, blank=True, null=True)
+    date = models.DateField('Date', blank=True, null=True)
+    time = models.TimeField('Time', blank=True, null=True)
+
+    def __str__(self):
+        return self.restaurant
+
