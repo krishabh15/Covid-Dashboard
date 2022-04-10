@@ -47,7 +47,8 @@ class FamilyVisitsForm(ModelForm):
 
     class Meta:
         model = FamilyVisit
-        fields = ('location', 'Noofpeople', 'date', 'time' , 'reason')
+        fields = ('location', 'Noofpeople', 'date', 'time', 'reason')
+
 
 class DoctorVisitsForm(ModelForm):
     doctor = forms.CharField(
@@ -56,7 +57,7 @@ class DoctorVisitsForm(ModelForm):
                 "placeholder": "Doctor",
                 "class": "form-control"
             }
-        ))
+        ), required=False)
     visit_date = forms.DateField(
         widget=forms.DateInput(
             attrs={

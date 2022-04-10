@@ -58,8 +58,14 @@
 				<div class="card-icon">
 					<i class="fa fa-twitter"></i>
 				</div>
-				<p class="card-category">Possible Contacts</p>
-				<h3 class="card-title">6</h3>
+				<p class="card-category">Last Doctor Visit</p>
+				{#<!-- {% for visit in visits %} -->
+				#}
+				<h3 class="card-title">{{visit.doctor}}</h3>
+				<small>{{visit.visit_date}}</small>
+				{#
+				<!-- {%endfor%} -->
+				#}
 			</div>
 			<div class="card-footer">
 				<div class="stats"><i class="material-icons">update</i> Just Updated</div>

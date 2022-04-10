@@ -1,3 +1,4 @@
+import imp
 from django import template
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -7,10 +8,15 @@ from django.urls import reverse
 from .forms import DoctorVisitsForm
 from .forms import FamilyVisitsForm
 from .forms import MedicineForm
+from .models import DoctorVisit
+
 
 @login_required(login_url="/login/")
 def index(request):
+    visits = DoctorVisit.objects.filter(user=request.user.id)[1::]
+    # visits = list(visits)
     context = {'segment': 'index'}
+    print(visits)
 
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
@@ -18,11 +24,11 @@ def index(request):
 
 @login_required(login_url="/login/")
 def pages(request):
-    context = {}
+
     # All resource paths end in .html.
     # Pick out the html file name from the url. And load that template.
     try:
-
+        context = {}
         load_template = request.path.split('/')[-1]
         if load_template == 'admin':
             return HttpResponseRedirect(reverse('admin:index'))
@@ -95,22 +101,26 @@ def doctor_visits(request):
     form = DoctorVisitsForm(request.POST)
     load_template = request.path.split('/')[-1] + '.html'
     submitted = False
+    visits = DoctorVisit.objects.filter(user=request.user.id)
     if request.method == "POST":
+        print(form.errors, form.is_valid())
         if form.is_valid():
             venue = form.save()
-            venue.owner = request.user.id  # logged in user
+            venue.user = request.user.id  # logged in user
             venue.save()
             print(venue)
             submitted = True
-            # form.save()
+            print(venue)
         else:
             form = DoctorVisitsForm
     html_template = loader.get_template('home/' + load_template)
     context = {
         'form': form,
         'success': submitted,
+        'visits': visits,
     }
     return HttpResponse(html_template.render(context, request))
+
 
 def family_visits(request):
     form = FamilyVisitsForm(request.POST)
@@ -130,8 +140,10 @@ def family_visits(request):
     context = {
         'form': form,
         'success': submitted,
+
     }
     return HttpResponse(html_template.render(context, request))
+
 
 def medicine(request):
     form = MedicineForm(request.POST)
