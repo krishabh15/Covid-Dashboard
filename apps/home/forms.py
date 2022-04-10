@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from .models import DoctorVisit
 from .models import FamilyVisit
 from .models import MedicineList
+from .models import Trips
 
 class FamilyVisitsForm(ModelForm):
     location = forms.CharField(
@@ -130,3 +131,40 @@ class MedicineForm(ModelForm):
     class Meta:
         model = MedicineList
         fields = ('medicine', 'Nooftimesaday', 'fromdate', 'to','reason')
+
+class TripsForm(ModelForm):
+    destination = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Destination",
+                "class": "form-control"
+            }
+        ), required=False)
+    duration = forms.IntegerField(
+        widget=forms.DateInput(
+            attrs={
+                "placeholder": "Duration",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+    fromdes = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "From",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+    to = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "To",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+
+    class Meta:
+        model = Trips
+        fields = ('destination', 'duration', 'fromdes', 'to')

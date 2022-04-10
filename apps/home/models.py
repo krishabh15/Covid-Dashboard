@@ -44,3 +44,12 @@ class MedicineList(models.Model):
 
     def __str__(self):
         return self.medicine
+
+class Trips(models.Model):
+    destination = models.CharField('Destination', max_length=120)
+    duration = models.IntegerField('Duration', max_length=500, blank=True, null=True)
+    fromdes = models.DateField('From', blank=True, null=True)
+    to = models.DateField('To', blank=True, null=True)
+
+    def __str__(self):
+        return self.destination

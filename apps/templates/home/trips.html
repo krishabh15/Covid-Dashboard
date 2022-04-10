@@ -19,6 +19,7 @@
 				<br />
 
 				{% if success %}
+					Done!
 
 				<p class="">
 					Please <a href="{% url 'login' %}" class="text-black text-small">authenticate</a> using the new account.
@@ -32,11 +33,11 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">Destination</label>
-								{{ form.username }}
+								{{ form.destination }}
 							</div>
 						</div>
 					</div>
-					<span class="text-danger">{{ form.username.errors }}</span>
+					<!-- <span class="text-danger">{{ form.username.errors }}</span> -->
 
 					<br />
 
@@ -44,11 +45,11 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">Duration</label>
-								{{ form.email }}
+								{{ form.duration }}
 							</div>
 						</div>
 					</div>
-					<span class="text-danger">{{ form.email.errors }}</span>
+					<!-- <span class="text-danger">{{ form.email.errors }}</span> -->
 
 					<br />
 
@@ -56,11 +57,11 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">From</label>
-								{{ form.password1 }}
+								{{ form.fromdes }}
 							</div>
 						</div>
 					</div>
-					<span class="text-danger">{{ form.password1.errors }}</span>
+					<!-- <span class="text-danger">{{ form.password1.errors }}</span> -->
 
 					<br />
 
@@ -68,20 +69,21 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">To</label>
-								{{ form.password2 }}
+								{{ form.to }}
 							</div>
 						</div>
 					</div>
-					<span class="text-danger">{{ form.password2.errors }}</span>
+					<!-- <span class="text-danger">{{ form.password2.errors }}</span> -->
 
 					<br />
 
-					<button type="submit" name="register" class="btn btn-primary pull-left">Save</button>
+					<!-- <button type="submit" name="register" class="btn btn-primary pull-left">Save</button> -->
 
 					&nbsp; &nbsp;
 					<!-- <span class="pull-right"> Have an account? <a href="{% url 'login' %}" class="text-primary">Login</a> </span> -->
 
 					<div class="clearfix"></div>
+					<input type="submit" value="Submit" class="btn btn-secondary" />
 				</form>
 				{% endif %}
 			</div>
@@ -89,7 +91,7 @@
 	</div>
 </div>
 
-<div class="row">
+<!-- <div class="row">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header card-header-primary">
@@ -198,8 +200,8 @@
 				</div>
 			</div>
 		</div>
-	</div> -->
-</div>
+	</div> 
+</div> -->
 
 {% endblock content %}
 
