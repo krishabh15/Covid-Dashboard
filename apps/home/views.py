@@ -93,16 +93,19 @@ def pages(request):
 def doctor_visits(request):
     form = DoctorVisitsForm(request.POST)
     load_template = request.path.split('/')[-1] + '.html'
+    submitted = False
     if request.method == "POST":
         if form.is_valid():
             venue = form.save()
             venue.owner = request.user.id  # logged in user
             venue.save()
+            submitted = True
             # form.save()
         else:
             form = DoctorVisitsForm
     html_template = loader.get_template('home/' + load_template)
     context = {
         'form': form,
+        'success': submitted,
     }
     return HttpResponse(html_template.render(context, request))
