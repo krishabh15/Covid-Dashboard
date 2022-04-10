@@ -4,19 +4,38 @@ from .models import DoctorVisit
 
 
 class DoctorVisitsForm(ModelForm):
+    doctor = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Doctor",
+                "class": "form-control"
+            }
+        ))
+    visit_date = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                "placeholder": "Visit Date",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+    reason = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Reason for Visit",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+    notes = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Notes",
+                "class": "form-control"
+            }
+        ),
+        required=False)
+
     class Meta:
         model = DoctorVisit
         fields = ('doctor', 'visit_date', 'reason', 'notes')
-
-        labels = {
-            'doctor_name': '',
-            'visit_date': 'YYYY-MM-DD',
-            'reason': 'Reason',
-            'notes': 'Notes',
-        }
-        widgets = {
-            'doctor': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Doctor Name'}),
-            'visit_date': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Visit Date'}),
-            'reason': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Reason'}),
-            'notes': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Notes'}),
-        }

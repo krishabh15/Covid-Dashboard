@@ -15,9 +15,9 @@ from django.db import models
 
 class DoctorVisit(models.Model):
     doctor = models.CharField('Doctor Name', max_length=120)
-    visit_date = models.DateTimeField('Visit Date')
-    reason = models.CharField('Reason of Viit', max_length=500)
-    notes = models.CharField('Notes', max_length=500)
+    visit_date = models.DateField('Visit Date', blank=True, null=True)
+    reason = models.CharField('Reason of Visit', max_length=500, blank=True, null=True)
+    notes = models.CharField('Notes', max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.doctor

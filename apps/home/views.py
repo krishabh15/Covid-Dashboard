@@ -15,95 +15,94 @@ def index(request):
     return HttpResponse(html_template.render(context, request))
 
 
-@login_required(login_url="/login/")
-def pages(request):
-    context = {}
-    # All resource paths end in .html.
-    # Pick out the html file name from the url. And load that template.
-    try:
-
-        load_template = request.path.split('/')[-1]
-
-        if load_template == 'admin':
-            return HttpResponseRedirect(reverse('admin:index'))
-        context['segment'] = load_template
-
-        html_template = loader.get_template('home/' + load_template)
-        return HttpResponse(html_template.render(context, request))
-
-    except template.TemplateDoesNotExist:
-
-        html_template = loader.get_template('home/page-404.html')
-        return HttpResponse(html_template.render(context, request))
-
-
-@login_required(login_url="/login/")
-def pages(request):
-    print(request)
-    context = {}
-    # All resource paths end in .html.
-    # Pick out the html file name from the url. And load that template.
-    try:
-
-        load_template = request.path.split('/')[-1]
-        print(request.method, load_template)
-        if load_template == 'admin':
-            return HttpResponseRedirect(reverse('admin:index'))
-        if load_template == 'doctors':
-            if request.method == "POST":
-                form = DoctorVisitsForm(request.POST, request.FILES)
-                print(form)
-                if form.is_valid():
-                    venue = form.save(commit=False)
-                    venue.owner = request.user.id  # logged in user
-                    venue.save()
-                    # form.save()
-                    return HttpResponseRedirect(reverse('doctors:index'))
-                else:
-                    form = DoctorVisitsForm
-                    if 'submitted' in request.GET:
-                        # submitted = True
-                        html_template = loader.get_template(
-                            'home/' + load_template)
-                    return HttpResponse(html_template.render(context, request))
-            else:
-                print('loaded')
-                return HttpResponseRedirect(reverse('doctors:index'))
-
-        context['segment'] = load_template
-
-        html_template = loader.get_template('home/' + load_template)
-        return HttpResponse(html_template.render(context, request))
-
-    except template.TemplateDoesNotExist:
-
-        html_template = loader.get_template('home/page-404.html')
-        return HttpResponse(html_template.render(context, request))
-
-
-def medicines(request):
-    path = HttpRequest.path()
-    print('@@@@', path)
-    return render(request, 'home/medicines.html')
+# @login_required(login_url="/login/")
+# def pages(request):
+#     context = {}
+#     # All resource paths end in .html.
+#     # Pick out the html file name from the url. And load that template.
+#     try:
+#
+#         load_template = request.path.split('/')[-1]
+#
+#         if load_template == 'admin':
+#             return HttpResponseRedirect(reverse('admin:index'))
+#         context['segment'] = load_template
+#
+#         html_template = loader.get_template('home/' + load_template)
+#         return HttpResponse(html_template.render(context, request))
+#
+#     except template.TemplateDoesNotExist:
+#
+#         html_template = loader.get_template('home/page-404.html')
+#         return HttpResponse(html_template.render(context, request))
+#
+#
+# @login_required(login_url="/login/")
+# def pages(request):
+#     print(request)
+#     context = {}
+#     # All resource paths end in .html.
+#     # Pick out the html file name from the url. And load that template.
+#     try:
+#
+#         load_template = request.path.split('/')[-1]
+#         print(request.method, load_template)
+#         if load_template == 'admin':
+#             return HttpResponseRedirect(reverse('admin:index'))
+#         if load_template == 'doctors':
+#             if request.method == "POST":
+#                 form = DoctorVisitsForm(request.POST, request.FILES)
+#                 print(form)
+#                 if form.is_valid():
+#                     venue = form.save(commit=False)
+#                     venue.owner = request.user.id  # logged in user
+#                     venue.save()
+#                     # form.save()
+#                     return HttpResponseRedirect(reverse('doctors:index'))
+#                 else:
+#                     form = DoctorVisitsForm
+#                     if 'submitted' in request.GET:
+#                         # submitted = True
+#                         html_template = loader.get_template(
+#                             'home/' + load_template)
+#                     return HttpResponse(html_template.render(context, request))
+#             else:
+#                 print('loaded')
+#                 return HttpResponseRedirect(reverse('doctors:index'))
+#
+#         context['segment'] = load_template
+#
+#         html_template = loader.get_template('home/' + load_template)
+#         return HttpResponse(html_template.render(context, request))
+#
+#     except template.TemplateDoesNotExist:
+#
+#         html_template = loader.get_template('home/page-404.html')
+#         return HttpResponse(html_template.render(context, request))
+#
+#
+# def medicines(request):
+#     path = HttpRequest.path()
+#     print('@@@@', path)
+#     return render(request, 'home/medicines.html')
 
 # @login_required(login_url="/login/")
 
 
-def DoctorVisits(request, load_template, context):
-    submitted = False
+def doctor_visits(request):
+    form = DoctorVisitsForm(request.POST)
+    load_template = request.path.split('/')[-1] + '.html'
     if request.method == "POST":
-        form = DoctorVisitsForm(request.POST, request.FILES)
         if form.is_valid():
-            venue = form.save(commit=False)
+            venue = form.save()
             venue.owner = request.user.id  # logged in user
             venue.save()
             # form.save()
             return HttpResponseRedirect(reverse('doctors:index'))
         else:
             form = DoctorVisitsForm
-            if 'submitted' in request.GET:
-                submitted = True
-        html_template = loader.get_template(
-            'home/' + load_template)
-        return HttpResponse(html_template.render(context, request))
-    # return render(request, 'home/doctors.html', {'form': form, 'submitted': submitted})
+    html_template = loader.get_template('home/' + load_template)
+    context = {
+        'form': form,
+    }
+    return HttpResponse(html_template.render(context, request))

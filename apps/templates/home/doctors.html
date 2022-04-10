@@ -19,10 +19,10 @@
 				<br />
 
 				{% if success %}
-
-				<p class="">
-					Please <a href="{% url 'login' %}" class="text-black text-small">authenticate</a> using the new account.
-				</p>
+                    Done!
+{#				<p class="">#}
+{#					Please <a href="{% url 'login' %}" class="text-black text-small">authenticate</a> using the new account.#}
+{#				</p>#}
 
 				{% else %}
 				<form role="form" method="post" action="">
@@ -32,35 +32,35 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">Doctor</label>
-								<input type="text" class="form-control" />
+								{{ form.doctor }}
 							</div>
 						</div>
 					</div>
-					<span class="text-danger">{{ form.username.errors }}</span>
+{#					<span class="text-danger">{{ form.username.errors }}</span>#}
 
 					<br />
 
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="bmd-label-floating">Date</label>
-								<input type="text" class="form-control" />
+								<label class="bmd-label-floating">Visit Date</label>
+                                {{ form.visit_date }}
 							</div>
 						</div>
 					</div>
-					<span class="text-danger">{{ form.email.errors }}</span>
+{#					<span class="text-danger">{{ form.email.errors }}</span>#}
 
 					<br />
 
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="bmd-label-floating">Reason of visit</label>
-								<input type="text" class="form-control" />
+								<label class="bmd-label-floating">Reason for Visit</label>
+								{{ form.reason }}
 							</div>
 						</div>
 					</div>
-					<span class="text-danger">{{ form.password1.errors }}</span>
+{#					<span class="text-danger">{{ form.password1.errors }}</span>#}
 
 					<br />
 
@@ -68,11 +68,11 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">Notes</label>
-								<input type="text" class="form-control" />
+								{{ form.notes }}
 							</div>
 						</div>
 					</div>
-					<span class="text-danger">{{ form.password2.errors }}</span>
+{#					<span class="text-danger">{{ form.password2.errors }}</span>#}
 
 					<br />
 
@@ -82,10 +82,10 @@
 					<!-- <span class="pull-right"> Have an account? <a href="{% url 'login' %}" class="text-primary">Login</a> </span> -->
 
 					<div class="clearfix"></div>
-				</form>
-				<form action="" method="POST" enctype="multipart/form-data">
-					{% csrf_token %} {{ form.as_p }}
-
+{#				</form>#}
+{#				<form action="" method="POST" enctype="multipart/form-data">#}
+{#					{% csrf_token %}#}
+{#                    {{ form.as_p }}#}
 					<input type="submit" value="Submit" class="btn btn-secondary" />
 				</form>
 				{% endif %}
@@ -94,73 +94,73 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-md-12">
-		<div class="card">
-			<div class="card-header card-header-primary">
-				<h4 class="card-title">Doctor Visits</h4>
-				<p class="card-category">Here is a list of your visits to the doctor</p>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-					<table class="table">
-						<thead class="text-primary">
-							<th>ID</th>
-							<th>Doctor Name</th>
-							<th>Date</th>
-							<th>Reason</th>
-							<th>Salary</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Dakota Rice</td>
-								<td>Niger</td>
-								<td>Oud-Turnhout</td>
-								<td class="text-primary">$36,738</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Minerva Hooper</td>
-								<td>Curaçao</td>
-								<td>Sinaai-Waas</td>
-								<td class="text-primary">$23,789</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Sage Rodriguez</td>
-								<td>Netherlands</td>
-								<td>Baileux</td>
-								<td class="text-primary">$56,142</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>Philip Chaney</td>
-								<td>Korea, South</td>
-								<td>Overland Park</td>
-								<td class="text-primary">$38,735</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>Doris Greene</td>
-								<td>Malawi</td>
-								<td>Feldkirchen in Kärnten</td>
-								<td class="text-primary">$63,542</td>
-							</tr>
-							<tr>
-								<td>6</td>
-								<td>Mason Porter</td>
-								<td>Chile</td>
-								<td>Gloucester</td>
-								<td class="text-primary">$78,615</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+{#<div class="row">#}
+{#	<div class="col-md-12">#}
+{#		<div class="card">#}
+{#			<div class="card-header card-header-primary">#}
+{#				<h4 class="card-title">Doctor Visits</h4>#}
+{#				<p class="card-category">Here is a list of your visits to the doctor</p>#}
+{#			</div>#}
+{#			<div class="card-body">#}
+{#				<div class="table-responsive">#}
+{#					<table class="table">#}
+{#						<thead class="text-primary">#}
+{#							<th>ID</th>#}
+{#							<th>Doctor Name</th>#}
+{#							<th>Date</th>#}
+{#							<th>Reason</th>#}
+{#							<th>Salary</th>#}
+{#						</thead>#}
+{#						<tbody>#}
+{#							<tr>#}
+{#								<td>1</td>#}
+{#								<td>Dakota Rice</td>#}
+{#								<td>Niger</td>#}
+{#								<td>Oud-Turnhout</td>#}
+{#								<td class="text-primary">$36,738</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>2</td>#}
+{#								<td>Minerva Hooper</td>#}
+{#								<td>Curaçao</td>#}
+{#								<td>Sinaai-Waas</td>#}
+{#								<td class="text-primary">$23,789</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>3</td>#}
+{#								<td>Sage Rodriguez</td>#}
+{#								<td>Netherlands</td>#}
+{#								<td>Baileux</td>#}
+{#								<td class="text-primary">$56,142</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>4</td>#}
+{#								<td>Philip Chaney</td>#}
+{#								<td>Korea, South</td>#}
+{#								<td>Overland Park</td>#}
+{#								<td class="text-primary">$38,735</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>5</td>#}
+{#								<td>Doris Greene</td>#}
+{#								<td>Malawi</td>#}
+{#								<td>Feldkirchen in Kärnten</td>#}
+{#								<td class="text-primary">$63,542</td>#}
+{#							</tr>#}
+{#							<tr>#}
+{#								<td>6</td>#}
+{#								<td>Mason Porter</td>#}
+{#								<td>Chile</td>#}
+{#								<td>Gloucester</td>#}
+{#								<td class="text-primary">$78,615</td>#}
+{#							</tr>#}
+{#						</tbody>#}
+{#					</table>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}
+{#	</div>#}
+{#</div>#}
 
 {% endblock content %}
 
