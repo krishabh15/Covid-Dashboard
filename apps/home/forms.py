@@ -217,7 +217,8 @@ class PersonalDataForm(ModelForm):
 
                 "class": "form-control"
             }
-        ), required=False)
+        ), 
+        required=False)
     dose1 = forms.DateField(
         widget=forms.DateInput(
             attrs={
@@ -256,10 +257,10 @@ class PersonalDataForm(ModelForm):
 
 
 class TempDataForm(ModelForm):
-    temprature = forms.CharField(
+    temp = forms.CharField(
         widget=forms.TextInput(
             attrs={
-
+                "type": "text",
                 "class": "form-control"
             }
         ), required=False)
@@ -287,4 +288,4 @@ class TempDataForm(ModelForm):
 
     class Meta:
         model = TempData
-        fields = ('temprature', 'date', 'time', 'notes')
+        fields = ('temp', 'date', 'time', 'notes')
