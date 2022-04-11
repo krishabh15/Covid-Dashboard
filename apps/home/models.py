@@ -74,3 +74,14 @@ class PersonalData(models.Model):
 
     def __str__(self):
         return self.vaccine
+
+
+class TempData(models.Model):
+    temp = models.CharField('Temperature', max_length=120)
+    date = models.DateField('Date', blank=True, null=True)
+    time = models.TimeField('Time', blank=True, null=True)
+    notes = models.CharField('Notes', max_length=500, blank=True, null=True)
+    user = models.IntegerField('id', max_length=500, blank=True, null=True)
+
+    def __str__(self):
+        return self.temp

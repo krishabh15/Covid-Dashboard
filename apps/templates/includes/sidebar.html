@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="purple" data-background-color="white" data-image="/static/assets/img/sidebar-1.jpg">
+<div class="sidebar" data-color="orange" data-background-color="white" data-image="/static/assets/img/sidebar-1.jpg">
 	<div class="logo">
 		<a target="_blank" rel="noopener noreferrer" href="#" class="simple-text logo-normal"> Covid Dashboard </a>
 	</div>
@@ -12,13 +12,19 @@
 					<p>Dashboard</p>
 				</a>
 			</li>
-			<li class="nav-item {% if 'page-user' in segment %} active {% endif %}">
-				<a class="nav-link" href="/page-user.html">
+			<li class="nav-item {% if 'temp' in segment %} active {% endif %}">
+				<a class="nav-link" href="/temp.html">
 					<i class="material-icons">person</i>
 					<p>Personal Checks</p>
 				</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item {% if 'vaccine' in segment %} active {% endif %}">
+				<a class="nav-link" href="/vaccine.html">
+					<i class="material-icons">healing</i>
+					<p>Vaccine Info</p>
+				</a>
+			</li>
+			<li class="nav-item {% if 'doctors' in segment %} active {% endif %}">
 				<a class="nav-link" href="/doctors">
 					<i class="material-icons">content_paste</i>
 					<p>Doctor Visits</p>
@@ -26,14 +32,14 @@
 			</li>
 			<li class="nav-item {% if 'medicines' in segment %} active {% endif %}">
 				<a class="nav-link" href="/medicines">
-					<i class="material-icons">library_books</i>
+					<i class="material-icons">local_hospital</i>
 					<p>Medicine List</p>
 				</a>
 			</li>
 			<li class="nav-item {% if 'family' in segment %} active {% endif %}">
 				<a class="nav-link" href="/family">
-					<i class="material-icons">bubble_chart</i>
-					<p>Family</p>
+					<i class="material-icons">favorite</i>
+					<p>Family Visits</p>
 				</a>
 			</li>
 			<li class="nav-item {% if 'trips' in segment %} active {% endif %}">
@@ -42,16 +48,10 @@
 					<p>Trips</p>
 				</a>
 			</li>
-			<li class="nav-item {% if 'ui-notifications' in segment %} active {% endif %}">
-				<a class="nav-link" href="/ui-notifications.html">
-					<i class="material-icons">notifications</i>
-					<p>Notifications</p>
-				</a>
-			</li>
 
-			<li class="nav-item">
+			<li class="nav-item {% if 'takeouts' in segment %} active {% endif %}">
 				<a class="nav-link" href="/takeouts">
-					<i class="material-icons">language</i>
+					<i class="material-icons">room_service</i>
 					<p>Take Outs</p>
 				</a>
 			</li>
@@ -63,23 +63,12 @@
 				</a>
 			</li>
 
-			<li class="nav-item {% if 'page-user' in segment %} active {% endif %} active-pro">
-				<a class="nav-link" target="_blank" rel="noopener noreferrer" href="/page-user.html">
-					<i class="material-icons">person</i>
-					<p>User Profile</p>
-				</a>
-			</li>
-
 			{% else %}
 
 			<li class="nav-item active">
-				<a
-					class="nav-link"
-					rel="noopener noreferrer"
-					href="https://appseed.us/admin-dashboards/django-dashboard-material-pro"
-				>
+				<a class="nav-link" rel="noopener noreferrer" href="{% url 'login' %}">
 					<i class="material-icons">unarchive</i>
-					<p>PRO Version</p>
+					<p>Login</p>
 				</a>
 			</li>
 

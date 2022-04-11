@@ -1,0 +1,84 @@
+{% extends "layouts/base.html" %} {% block title %} Page User {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<div class="row">
+	<div class="col-md-5">
+		<div class="card">
+			<div class="card-header card-header-primary">
+				<h4 class="card-title">Log Data</h4>
+			</div>
+			<div class="card-body">
+				<h6 class="card-category">
+					{% if msg %}
+					<span class="text-danger">{{ msg | safe }}</span>
+					{% else %} Add your temperature {% endif %}
+				</h6>
+
+				<br />
+
+				{% if success %}
+				<h3 style="color: green">Data Saved!</h3>
+				<br />
+				{% endif %}
+
+				<form role="form" method="POST" action="">
+					{% csrf_token %}
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="bmd-label-floating">Temperature</label>
+								{{ form.doctor }}
+							</div>
+						</div>
+					</div>
+
+					<br />
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group"><span>Date</span> <span>{{ form.visit_date }}</span></div>
+						</div>
+					</div>
+
+					<br />
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="bmd-label-floating">Time</label>
+								{{ form.reason }}
+							</div>
+						</div>
+					</div>
+
+					<br />
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="bmd-label-floating">Notes / Other Symptoms</label>
+								{{ form.notes }}
+							</div>
+						</div>
+					</div>
+
+					<br />
+
+					&nbsp; &nbsp;
+
+					<div class="clearfix"></div>
+
+					<input type="submit" value="Submit" class="btn btn-secondary" />
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

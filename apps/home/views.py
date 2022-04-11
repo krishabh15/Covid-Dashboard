@@ -9,11 +9,16 @@ from .models import DoctorVisit, FamilyVisit, MedicineList, Takeouts, Trips
 
 @login_required(login_url="/login/")
 def index(request):
-    visits = DoctorVisit.objects.filter(user=request.user.id)[1::]
-    context = {'segment': 'index'}
-    print(visits)
+    visits = DoctorVisit.objects.filter(user=request.user.id)
+    fams = FamilyVisit.objects.filter(user=request.user.id)
+    meds = MedicineList.objects.filter(user=request.user.id)
+    trips = Trips.objects.filter(user=request.user.id)
+    outs = Takeouts.objects.filter(user=request.user.id)
+    context = {'segment': 'index', 'visits': visits,
+               'lists': meds, 'visits': fams, 'trips': trips, 'outs': outs, }
 
     html_template = loader.get_template('home/index.html')
+    print(visits, fams, meds, trips, outs)
     return HttpResponse(html_template.render(context, request))
 
 
@@ -60,6 +65,7 @@ def doctor_visits(request):
         'form': form,
         'success': submitted,
         'visits': visits,
+        'segment': 'doctors',
     }
     return HttpResponse(html_template.render(context, request))
 
@@ -84,6 +90,7 @@ def family_visits(request):
         'form': form,
         'success': submitted,
         'visits': visits,
+        'segment': 'family',
 
     }
     return HttpResponse(html_template.render(context, request))
@@ -109,6 +116,7 @@ def medicine(request):
         'form': form,
         'success': submitted,
         'lists': lists,
+        'segment': 'medicines'
     }
     return HttpResponse(html_template.render(context, request))
 
@@ -133,6 +141,7 @@ def trips(request):
         'form': form,
         'success': submitted,
         'trips': trips,
+        'segment': 'trips',
     }
     return HttpResponse(html_template.render(context, request))
 
@@ -156,6 +165,7 @@ def takeouts(request):
     context = {
         'form': form,
         'success': submitted,
-        'outs': outs
+        'outs': outs,
+        'segment': 'takeouts'
     }
     return HttpResponse(html_template.render(context, request))
