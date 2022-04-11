@@ -18,12 +18,10 @@
 
 				<br />
 
-				{% if success %} Done!
-				<p class="">
-					Please <a href="{% url 'login' %}" class="text-black text-small">authenticate</a> using the new account.
-				</p>
-
-				{% else %}
+				{% if success %}
+				<h3 style="color: green">Data Saved!</h3>
+				<br />
+				{% endif %}
 				<form role="form" method="POST" action="">
 					{% csrf_token %}
 
@@ -88,7 +86,6 @@
 
 					<input type="submit" value="Submit" class="btn btn-secondary" />
 				</form>
-				{% endif %}
 			</div>
 		</div>
 	</div>

@@ -18,13 +18,10 @@
 
 				<br />
 
-				{% if success %} Done!
-
-				<p class="">
-					Please <a href="{% url 'login' %}" class="text-black text-small">authenticate</a> using the hitesh's SIR.
-				</p>
-
-				{% else %}
+				{% if success %}
+				<h3 style="color: green">Data Saved!</h3>
+				<br />
+				{% endif %}
 				<form role="form" method="post" action="">
 					{% csrf_token %}
 
@@ -36,7 +33,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- <span class="text-danger">{{ form.username.errors }}</span> -->
 
 					<br />
 
@@ -48,43 +44,34 @@
 							</div>
 						</div>
 					</div>
-					<!-- <span class="text-danger">{{ form.email.errors }}</span> -->
 
 					<br />
 
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="bmd-label-floating">Date</label>
+								<label>Date</label>
 								{{ form.date }}
 							</div>
 						</div>
 					</div>
-					<!-- <span class="text-danger">{{ form.password1.errors }}</span> -->
 
 					<br />
 
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="bmd-label-floating">Time</label>
+								<label>Time</label>
 								{{ form.time }}
 							</div>
 						</div>
 					</div>
-					<!-- <span class="text-danger">{{ form.password2.errors }}</span> -->
 
 					<br />
-
-					<!-- <button type="submit" name="register" class="btn btn-primary pull-left">Save</button> -->
-
-					&nbsp; &nbsp;
-					<!-- <span class="pull-right"> Have an account? <a href="{% url 'login' %}" class="text-primary">Login</a> </span> -->
 
 					<div class="clearfix"></div>
 					<input type="submit" value="Submit" class="btn btn-secondary" />
 				</form>
-				{% endif %}
 			</div>
 		</div>
 	</div>

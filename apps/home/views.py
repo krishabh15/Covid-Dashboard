@@ -1,5 +1,4 @@
 from django import template
-# from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -53,6 +52,7 @@ def doctor_visits(request):
             venue.user = request.user.id  # logged in user
             venue.save()
             submitted = True
+            form = DoctorVisitsForm
         else:
             form = DoctorVisitsForm
     html_template = loader.get_template('home/' + load_template)
@@ -76,7 +76,7 @@ def family_visits(request):
             venue.user = request.user.id  # logged in user
             venue.save()
             submitted = True
-            # form.save()
+            form = FamilyVisitsForm
         else:
             form = FamilyVisitsForm
     html_template = loader.get_template('home/' + load_template)
@@ -101,7 +101,7 @@ def medicine(request):
             venue.user = request.user.id  # logged in user
             venue.save()
             submitted = True
-            # form.save()
+            form = MedicineForm
         else:
             form = MedicineForm
     html_template = loader.get_template('home/' + load_template)
@@ -125,7 +125,7 @@ def trips(request):
             venue.user = request.user.id  # logged in user
             venue.save()
             submitted = True
-            # form.save()
+            form = TripsForm
         else:
             form = TripsForm
     html_template = loader.get_template('home/' + load_template)
@@ -149,7 +149,7 @@ def takeouts(request):
             venue.user = request.user.id  # logged in user
             venue.save()
             submitted = True
-            # form.save()
+            form = TakeoutsForm
         else:
             form = TakeoutsForm
     html_template = loader.get_template('home/' + load_template)

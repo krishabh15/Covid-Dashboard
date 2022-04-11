@@ -7,14 +7,14 @@ class FamilyVisitsForm(ModelForm):
     location = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Location",
+
                 "class": "form-control"
             }
         ))
     Noofpeople = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "No of people",
+
                 "class": "form-control"
             }
         ),
@@ -22,7 +22,7 @@ class FamilyVisitsForm(ModelForm):
     date = forms.DateField(
         widget=forms.DateInput(
             attrs={
-                "placeholder": "Date",
+                "type": "date",
                 "class": "form-control"
             }
         ),
@@ -30,7 +30,7 @@ class FamilyVisitsForm(ModelForm):
     time = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Time",
+                "type": "time",
                 "class": "form-control"
             }
         ),
@@ -38,7 +38,7 @@ class FamilyVisitsForm(ModelForm):
     reason = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Reason",
+
                 "class": "form-control"
             }
         ),
@@ -53,22 +53,23 @@ class DoctorVisitsForm(ModelForm):
     doctor = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Doctor",
+
                 "class": "form-control"
             }
         ), required=False)
     visit_date = forms.DateField(
         widget=forms.DateInput(
             attrs={
-                "placeholder": "Visit Date",
-                "class": "form-control"
+
+                "class": "form-control",
+                "type": "date",
             }
         ),
         required=False)
     reason = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Reason for Visit",
+
                 "class": "form-control"
             }
         ),
@@ -76,7 +77,7 @@ class DoctorVisitsForm(ModelForm):
     notes = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Notes",
+
                 "class": "form-control"
             }
         ),
@@ -91,22 +92,22 @@ class MedicineForm(ModelForm):
     medicine = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Medicine",
+
                 "class": "form-control"
             }
         ))
     Nooftimesaday = forms.CharField(
         widget=forms.DateInput(
             attrs={
-                "placeholder": "No of times a day",
-                "class": "form-control"
+                "class": "form-control",
+
             }
         ),
         required=False)
     fromdate = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "From",
+                "type": "date",
                 "class": "form-control"
             }
         ),
@@ -114,7 +115,7 @@ class MedicineForm(ModelForm):
     to = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "To",
+                "type": "date",
                 "class": "form-control"
             }
         ),
@@ -122,7 +123,7 @@ class MedicineForm(ModelForm):
     reason = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Reason",
+
                 "class": "form-control"
             }
         ),
@@ -137,30 +138,30 @@ class TripsForm(ModelForm):
     destination = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Destination",
+
                 "class": "form-control"
             }
         ), required=False)
     duration = forms.IntegerField(
-        widget=forms.DateInput(
+        widget=forms.TextInput(
             attrs={
-                "placeholder": "Duration",
+
                 "class": "form-control"
             }
         ),
         required=False)
     fromdes = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.DateInput(
             attrs={
-                "placeholder": "From",
+                "type": "date",
                 "class": "form-control"
             }
         ),
         required=False)
     to = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.DateInput(
             attrs={
-                "placeholder": "To",
+                "type": "date",
                 "class": "form-control"
             }
         ),
@@ -175,14 +176,14 @@ class TakeoutsForm(ModelForm):
     restaurant = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Restaurant / Cafe",
+
                 "class": "form-control"
             }
         ), required=False)
     type = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "Type",
+
                 "class": "form-control"
             }
         ),
@@ -190,7 +191,7 @@ class TakeoutsForm(ModelForm):
     date = forms.DateField(
         widget=forms.DateInput(
             attrs={
-                "placeholder": "Date",
+                "type": "date",
                 "class": "form-control"
             }
         ),
@@ -198,7 +199,7 @@ class TakeoutsForm(ModelForm):
     time = forms.TimeField(
         widget=forms.TimeInput(
             attrs={
-                "placeholder": "To",
+                "type": "time",
                 "class": "form-control"
             }
         ),
