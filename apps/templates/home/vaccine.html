@@ -1,4 +1,4 @@
-{% extends "layouts/base.html" %} {% block title %} UI Notifications {% endblock %}
+{% extends "layouts/base.html" %} {% block title %} Vaccination Info {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %} {% block content %}
@@ -7,13 +7,13 @@
 	<div class="col-md-5">
 		<div class="card">
 			<div class="card-header card-header-primary">
-				<h4 class="card-title">Log Personal Data</h4>
+				<h4 class="card-title">Log Vaccinations</h4>
 			</div>
 			<div class="card-body">
 				<h6 class="card-category">
 					{% if msg %}
 					<span class="text-danger">{{ msg | safe }}</span>
-					{% else %} Add your Covid Data {% endif %}
+					{% else %} Add your vaccinations {% endif %}
 				</h6>
 
 				<br />
@@ -22,13 +22,14 @@
 				<h3 style="color: green">Data Saved!</h3>
 				<br />
 				{% endif %}
+
 				<form role="form" method="POST" action="">
 					{% csrf_token %}
 
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="bmd-label-floating">Vaccine</label>
+								<label class="bmd-label-floating">Vaccination</label>
 								{{ form.vaccine }}
 							</div>
 						</div>
@@ -38,10 +39,7 @@
 
 					<div class="row">
 						<div class="col-md-12">
-							<div class="form-group">
-								<label class="bmd-label-floating">1st Dose</label>
-								{{ form.dose1 }}
-							</div>
+							<div class="form-group"><span>1st Dose</span> <span>{{ form.dose1 }}</span></div>
 						</div>
 					</div>
 
@@ -49,10 +47,7 @@
 
 					<div class="row">
 						<div class="col-md-12">
-							<div class="form-group">
-								<label class="bmd-label-floating">2nd Dose</label>
-								{{ form.dose2 }}
-							</div>
+							<div class="form-group"><span>2nd Dose</span> <span>{{ form.dose2 }}</span></div>
 						</div>
 					</div>
 
@@ -60,10 +55,7 @@
 
 					<div class="row">
 						<div class="col-md-12">
-							<div class="form-group">
-								<label class="bmd-label-floating">Booster</label>
-								{{ form.booster }}
-							</div>
+							<div class="form-group"><span>Booster</span> <span>{{ form.booster }}</span></div>
 						</div>
 					</div>
 
@@ -91,16 +83,52 @@
 	</div>
 </div>
 
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header card-header-primary">
+				<h4 class="card-title">Doctor Visits</h4>
+
+				<p class="card-category">Here is a list of your visits to the doctor</p>
+			</div>
+
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table">
+						<thead class="text-primary">
+							<th>Vaccination</th>
+
+							<th>1st Dose</th>
+
+							<th>2nd Dose</th>
+
+							<th>Booster</th>
+
+							<th>Notes</th>
+						</thead>
+
+						<tbody>
+							{% for vaccine in vaccines %}
+							<tr>
+								<td>{{vaccine.vaccine}}</td>
+
+								<td>{{vaccine.dose1}}</td>
+
+								<td>{{vaccine.dose2}}</td>
+
+								<td>{{vaccine.booster}}</td>
+
+								<td class="text-primary">{{visit.notes}}</td>
+							</tr>
+							{%endfor%}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}
-
-<script>
-	$(document).ready(function () {
-		//init DateTimePickers
-		md.initFormExtendedDatetimepickers();
-	});
-</script>
-
-{% endblock javascripts %}
+{% block javascripts %}{% endblock javascripts %}
