@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
-from .forms import DoctorVisitsForm, FamilyVisitsForm, MedicineForm, TripsForm, TakeoutsForm
-from .models import DoctorVisit, FamilyVisit, MedicineList, Takeouts, Trips
+from .forms import DoctorVisitsForm, FamilyVisitsForm, MedicineForm, TripsForm, TakeoutsForm, TempDataForm, PersonalDataForm
+from .models import DoctorVisit, FamilyVisit, MedicineList, PersonalData, Takeouts, TempData, Trips
 
 
 @login_required(login_url="/login/")
@@ -167,5 +167,55 @@ def takeouts(request):
         'success': submitted,
         'outs': outs,
         'segment': 'takeouts'
+    }
+    return HttpResponse(html_template.render(context, request))
+
+
+def personal_data(request):
+    form = PersonalDataForm(request.POST)
+    load_template = request.path.split('/')[-1] + '.html'
+    outs = PersonalData.objects.filter(user=request.user.id)
+    submitted = False
+    if request.method == "POST":
+        print(request.method, form.errors)
+        if form.is_valid():
+            venue = form.save()
+            venue.user = request.user.id  # logged in user
+            venue.save()
+            submitted = True
+            form = PersonalDataForm
+        else:
+            form = PersonalDataForm
+    html_template = loader.get_template('home/' + load_template)
+    context = {
+        'form': form,
+        'success': submitted,
+        'outs': outs,
+        'segment': 'personal_data'
+    }
+    return HttpResponse(html_template.render(context, request))
+
+
+def temp_data(request):
+    form = TempDataForm(request.POST)
+    load_template = request.path.split('/')[-1] + '.html'
+    outs = TempData.objects.filter(user=request.user.id)
+    submitted = False
+    if request.method == "POST":
+        print(request.method, form.errors)
+        if form.is_valid():
+            venue = form.save()
+            venue.user = request.user.id  # logged in user
+            venue.save()
+            submitted = True
+            form = TempDataForm
+        else:
+            form = TempDataForm
+    html_template = loader.get_template('home/' + load_template)
+    context = {
+        'form': form,
+        'success': submitted,
+        'outs': outs,
+        'segment': 'temp_data'
     }
     return HttpResponse(html_template.render(context, request))

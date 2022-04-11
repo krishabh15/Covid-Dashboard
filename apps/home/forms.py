@@ -1,4 +1,4 @@
-from .models import DoctorVisit, FamilyVisit, MedicineList, Trips, Takeouts
+from .models import DoctorVisit, FamilyVisit, MedicineList, Trips, Takeouts, TempData, PersonalData
 from django import forms
 from django.forms import ModelForm
 
@@ -208,3 +208,83 @@ class TakeoutsForm(ModelForm):
     class Meta:
         model = Takeouts
         fields = ('restaurant', 'type', 'date', 'time')
+
+
+class PersonalDataForm(ModelForm):
+    vaccine = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+
+                "class": "form-control"
+            }
+        ), required=False)
+    dose1 = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                "type": "date",
+                "class": "form-control"
+            }
+        ), 
+        required=False)
+    dose2 = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                "type": "date",
+                "class": "form-control"
+            }
+        ), 
+        required=False)
+    booster = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                "type": "date",
+                "class": "form-control"
+            }
+        ), 
+        required=False)
+    notes = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+
+                "class": "form-control"
+            }
+        ), required=False)
+
+    class Meta:
+        model = PersonalData
+        fields = ('vaccine', 'dose1', 'dose2', 'booster', 'notes')
+
+
+class TempDataForm(ModelForm):
+    temprature = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+
+                "class": "form-control"
+            }
+        ), required=False)
+    date = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                "type": "date",
+                "class": "form-control"
+            }
+        ), required=False)
+    time = forms.TimeField(
+        widget=forms.TimeInput(
+            attrs={
+                "type": "time",
+                "class": "form-control"
+            }
+        ), required=False)
+    notes = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+
+                "class": "form-control"
+            }
+        ), required=False)
+
+    class Meta:
+        model = TempData
+        fields = ('temprature', 'date', 'time', 'notes')
