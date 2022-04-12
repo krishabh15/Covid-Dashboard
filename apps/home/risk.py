@@ -11,11 +11,12 @@ def calcRisk(vaccine, temp, trips, people):
 
 
 def getVax(q):
-    val = 0
-    if(q[0].booster):
-        val = 1
-    elif(q[0].dose2 and q[0].booster is None):
-        val = 3
-    elif(q[0].booster is None and q[0].dose2 is None and q[0].dose1):
-        val = 5
-    return val
+    if(q.count() > 0):
+        val = 0
+        if(q[0].booster):
+            val = 1
+        elif(q[0].dose2 and q[0].booster is None):
+            val = 3
+        elif(q[0].booster is None and q[0].dose2 is None and q[0].dose1):
+            val = 5
+        return val
