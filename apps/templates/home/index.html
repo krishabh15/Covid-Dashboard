@@ -113,15 +113,15 @@
 						</thead>
 
 						<tbody>
-							{% for visit in visits %}
+							{% for app in apps %}
 							<tr>
-								<td class="text-primary">{{visit.doctor}}</td>
+								<td class="text-primary">{{app.doctor}}</td>
 
-								<td>{{visit.visit_date}}</td>
+								<td>{{app.visit_date}}</td>
 
-								<td>{{visit.reason}}</td>
+								<td>{{app.reason}}</td>
 
-								<td>{{visit.notes}}</td>
+								<td>{{app.notes}}</td>
 							</tr>
 							{%endfor%}
 						</tbody>

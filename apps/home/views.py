@@ -18,6 +18,7 @@ def index(request):
     outs = Takeouts.objects.filter(user=user)
     temps = TempData.objects.filter(user=user)
     vax = PersonalData.objects.filter(user=user)
+    username = request.user.username
 
     temp = TempData.objects.filter(user=user).last()
     takeout = Takeouts.objects.filter(user=user).last()
@@ -33,12 +34,12 @@ def index(request):
         temp = int(temp.temp)
     vaccine = getVax(vax)
     risk = calcRisk(vaccine or 5, temp or 0, trip, people)
-    context = {'segment': 'index', 'visits': visits,
+    context = {'segment': 'index', 'apps': visits,
                'lists': meds, 'visits': fams,
                'trips': trips, 'outs': outs,
                'temps': temps, 'temp': temp,
                'takeout': takeout, 'drvisit': drvisit,
-               'risk': int(risk), 'vax': vax}
+               'risk': int(risk), 'vax': vax, 'username': username}
 
     html_template = loader.get_template('home/index.html')
 
