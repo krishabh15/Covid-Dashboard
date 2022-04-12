@@ -5,6 +5,7 @@ from django.template import loader
 from django.urls import reverse
 from .forms import DoctorVisitsForm, FamilyVisitsForm, MedicineForm, TripsForm, TakeoutsForm, TempDataForm, PersonalDataForm
 from .models import DoctorVisit, FamilyVisit, MedicineList, PersonalData, Takeouts, TempData, Trips
+from .risk import calcRisk, getVax
 
 
 @login_required(login_url="/login/")
@@ -16,50 +17,40 @@ def index(request):
     trips = Trips.objects.filter(user=user)
     outs = Takeouts.objects.filter(user=user)
     temps = TempData.objects.filter(user=user)
+    vax = PersonalData.objects.filter(user=user)
+
     temp = TempData.objects.filter(user=user).last()
     takeout = Takeouts.objects.filter(user=user).last()
     drvisit = DoctorVisit.objects.filter(user=user).last()
+    trip = trips.count()
+
+    people = 0
+    if(fams is not None):
+        for f in fams.iterator():
+            people = people + (f.noofpeople or 0)
+
     if(temp is not None):
         temp = int(temp.temp)
+    vaccine = getVax(vax)
+    risk = calcRisk(vaccine or 5, temp or 0, trip, people)
     context = {'segment': 'index', 'visits': visits,
                'lists': meds, 'visits': fams,
                'trips': trips, 'outs': outs,
                'temps': temps, 'temp': temp,
-               'takeout': takeout, 'drvisit': drvisit}
+               'takeout': takeout, 'drvisit': drvisit,
+               'risk': int(risk), 'vax': vax}
 
     html_template = loader.get_template('home/index.html')
-    print(type(temp))
+
     return HttpResponse(html_template.render(context, request))
-
-
-@login_required(login_url="/login/")
-def pages(request):
-
-    # All resource paths end in .html.
-    # Pick out the html file name from the url. And load that template.
-    try:
-        context = {}
-        load_template = request.path.split('/')[-1]
-        if load_template == 'admin':
-            return HttpResponseRedirect(reverse('admin:index'))
-        # elif load_template == 'doctors':
-        #     return HttpResponseRedirect(reverse('doctors:index'))
-        context['segment'] = load_template
-
-        html_template = loader.get_template('home/' + load_template)
-        return HttpResponse(html_template.render(context, request))
-
-    except template.TemplateDoesNotExist:
-
-        html_template = loader.get_template('home/page-404.html')
-        return HttpResponse(html_template.render(context, request))
 
 
 def doctor_visits(request):
     form = DoctorVisitsForm(request.POST)
     load_template = request.path.split('/')[-1] + '.html'
     submitted = False
-    visits = DoctorVisit.objects.filter(user=request.user.id)
+    visits = DoctorVisit.objects.filter(
+        user=request.user.id).order_by('-visit_date')
     if request.method == "POST":
         print(form.errors, form.is_valid())
         if form.is_valid():
