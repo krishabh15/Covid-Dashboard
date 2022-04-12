@@ -26,14 +26,22 @@
 				</div>
 				<p class="card-category">Last Temp</p>
 				<h3 class="card-title">
-					180
+					{% if temp is not None%} {{temp}} {%else%} {{'-'}} {%endif%}
 					<small>F</small>
 				</h3>
 			</div>
 			<div class="card-footer">
 				<div class="stats">
+					{% if temp > 98 %}
 					<i class="material-icons text-danger">warning</i>
-					<p>High</p>
+					<p style="color: red">High</p>
+					{% elif temp < 98 %}
+					<i class="material-icons" style="color: green">check</i>
+					<p style="color: green">Normal</p>
+					{% else %}
+					<i class="material-icons" style="color: yellow">warning</i>
+					<p style="color: green">-</p>
+					{%endif%}
 				</div>
 			</div>
 		</div>
@@ -45,10 +53,17 @@
 					<i class="material-icons">store</i>
 				</div>
 				<p class="card-category">Last Takeout</p>
-				<h3 class="card-title">Subway</h3>
+				{% if takeout is not None%}
+				<h3 class="card-title">{{takeout.restaurant}}</h3>
+				{%else%}
+				<h3 class="card-title">{{'-'}}</h3>
+				{%endif%}
 			</div>
 			<div class="card-footer">
-				<div class="stats"><i class="material-icons">date_range</i> Last 24 Hours</div>
+				<div class="stats">
+					{% if takeout is not None%}
+					<i class="material-icons">date_range</i> {{takeout.date}} {%else%} {{'No data to display'}} {%endif%}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -57,14 +72,20 @@
 		<div class="card card-stats">
 			<div class="card-header card-header-info card-header-icon">
 				<div class="card-icon">
-					<i class="fa fa-twitter"></i>
+					<i class="material-icons" style="color: white">medication</i>
 				</div>
 				<p class="card-category">Last Doctor Visit</p>
-				<h3 class="card-title">{{visit.doctor}}</h3>
-				<small>{{visit.visit_date}}</small>
+				{% if drvisit is not None%}
+				<h3 class="card-title">{{drvisit.doctor}}</h3>
+				{%else%}
+				<h3 class="card-title">{{'-'}}</h3>
+				{%endif%}
 			</div>
 			<div class="card-footer">
-				<div class="stats"><i class="material-icons">update</i> Just Updated</div>
+				<div class="stats">
+					{% if takeout is not None%}
+					<i class="material-icons">update</i> {{drvisit.visit_date}} {%else%} {{'No data to display'}} {%endif%}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -82,8 +103,6 @@
 				<div class="table-responsive">
 					<table class="table">
 						<thead class="text-primary">
-							<th>ID</th>
-
 							<th>Doctor Name</th>
 
 							<th>Date</th>
@@ -96,9 +115,7 @@
 						<tbody>
 							{% for visit in visits %}
 							<tr>
-								<td class="text-primary">{{visit.id}}</td>
-
-								<td>{{visit.doctor}}</td>
+								<td class="text-primary">{{visit.doctor}}</td>
 
 								<td>{{visit.visit_date}}</td>
 

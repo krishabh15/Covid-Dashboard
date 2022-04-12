@@ -30,7 +30,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="bmd-label-floating">Vaccination</label>
-								{{ form.vaccine }}
+								{{ form.temp }}
 							</div>
 						</div>
 					</div>
@@ -83,42 +83,38 @@
 	</div>
 </div>
 
-<!-- <div class="row">
+<div class="row">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header card-header-primary">
-				<h4 class="card-title">Doctor Visits</h4>
+				<h4 class="card-title">Temperature Record</h4>
 
-				<p class="card-category">Here is a list of your visits to the doctor</p>
+				<p class="card-category">Here is a list of your measured temperatures</p>
 			</div>
 
 			<div class="card-body">
 				<div class="table-responsive">
 					<table class="table">
 						<thead class="text-primary">
-							<th>Vaccination</th>
+							<th>Temperature</th>
 
-							<th>1st Dose</th>
+							<th>Date</th>
 
-							<th>2nd Dose</th>
-
-							<th>Booster</th>
+							<th>Time</th>
 
 							<th>Notes</th>
 						</thead>
 
 						<tbody>
-							{% for vaccine in vaccines %}
+							{% for temp in temps %}
 							<tr>
-								<td>{{vaccine.vaccine}}</td>
+								<td>{{temp.temp}}</td>
 
-								<td>{{vaccine.dose1}}</td>
+								<td>{{temp.date}}</td>
 
-								<td>{{vaccine.dose2}}</td>
+								<td>{{temp.time}}</td>
 
-								<td>{{vaccine.booster}}</td>
-
-								<td class="text-primary">{{visit.notes}}</td>
+								<td>{{temp.notes}}</td>
 							</tr>
 							{%endfor%}
 						</tbody>
@@ -127,12 +123,8 @@
 			</div>
 		</div>
 	</div>
-</div> -->
+</div>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}
-
-
-
-{% endblock javascripts %}
+{% block javascripts %} {% endblock javascripts %}

@@ -1,7 +1,7 @@
-from pyexpat import model
 from django.db import models
 
 # Create your models here.
+
 
 class DoctorVisit(models.Model):
     doctor = models.CharField('Doctor Name', max_length=120)

@@ -9,16 +9,26 @@ from .models import DoctorVisit, FamilyVisit, MedicineList, PersonalData, Takeou
 
 @login_required(login_url="/login/")
 def index(request):
-    visits = DoctorVisit.objects.filter(user=request.user.id)
-    fams = FamilyVisit.objects.filter(user=request.user.id)
-    meds = MedicineList.objects.filter(user=request.user.id)
-    trips = Trips.objects.filter(user=request.user.id)
-    outs = Takeouts.objects.filter(user=request.user.id)
+    user = request.user.id
+    visits = DoctorVisit.objects.filter(user=user).order_by('-visit_date')
+    fams = FamilyVisit.objects.filter(user=user)
+    meds = MedicineList.objects.filter(user=user)
+    trips = Trips.objects.filter(user=user)
+    outs = Takeouts.objects.filter(user=user)
+    temps = TempData.objects.filter(user=user)
+    temp = TempData.objects.filter(user=user).last()
+    takeout = Takeouts.objects.filter(user=user).last()
+    drvisit = DoctorVisit.objects.filter(user=user).last()
+    if(temp is not None):
+        temp = int(temp.temp)
     context = {'segment': 'index', 'visits': visits,
-               'lists': meds, 'visits': fams, 'trips': trips, 'outs': outs, }
+               'lists': meds, 'visits': fams,
+               'trips': trips, 'outs': outs,
+               'temps': temps, 'temp': temp,
+               'takeout': takeout, 'drvisit': drvisit}
 
     html_template = loader.get_template('home/index.html')
-    print(visits, fams, meds, trips, outs)
+    print(type(temp))
     return HttpResponse(html_template.render(context, request))
 
 
@@ -191,7 +201,7 @@ def personal_data(request):
         'form': form,
         'success': submitted,
         'outs': outs,
-        'segment': 'personal_data'
+        'segment': 'personal_data',
     }
     return HttpResponse(html_template.render(context, request))
 
@@ -199,7 +209,7 @@ def personal_data(request):
 def temp_data(request):
     form = TempDataForm(request.POST)
     load_template = request.path.split('/')[-1] + '.html'
-    outs = TempData.objects.filter(user=request.user.id)
+    temps = TempData.objects.filter(user=request.user.id)
     submitted = False
     if request.method == "POST":
         print(request.method, form.errors)
@@ -215,7 +225,7 @@ def temp_data(request):
     context = {
         'form': form,
         'success': submitted,
-        'outs': outs,
-        'segment': 'temp_data'
+        'temps': temps,
+        'segment': 'temp_data',
     }
     return HttpResponse(html_template.render(context, request))
