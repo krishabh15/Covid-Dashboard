@@ -1,1 +1,1 @@
-Site at: https://covid-dashboard-ood.herokuapp.com/
+Site at: https://covid-dashboard.herokuapp.com/
