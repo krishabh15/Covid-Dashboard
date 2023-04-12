@@ -15,7 +15,7 @@ DEBUG = True
 
 # load production server from .env
 ALLOWED_HOSTS = ['localhost', '127.0.0.1',
-                 config('SERVER', default='127.0.0.1'), 'covid-dashboard-ood.herokuapp.com']
+                 config('SERVER', default='127.0.0.1'), 'covid-dashboard.herokuapp.com']
 
 # Application definition
 
